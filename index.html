@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사랑이뭐조 | 생물학적 사랑 vs 인문학적 사랑 테스트</title>
+  <style>
+    :root {
+      --bg-color: #F5EBEE;
+      --card-bg: #FFFFFF;
+      --primary-color: #B5717E;
+      --primary-hover: #9A6A73;
+      --text-main: #3A3233;
+      --text-sub: #7A6F72;
+      --border-color: #E2D1D6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 36px 28px;
+      box-shadow: 0 12px 30px rgba(181, 113, 126, 0.12);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* 인트로 섹션 */
+    .intro-box h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--primary-color);
+      line-height: 1.4;
+    }
+
+    .intro-box p {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: var(--text-main);
+      margin-bottom: 24px;
+    }
+
+    .team-badge {
+      display: inline-block;
+      background-color: #F0E2E5;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* 질문 섹션 */
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background-color: #EFE7E9;
+      border-radius: 3px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary-color);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .question-number {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      background-color: #FAF6F7;
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 18px 16px;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 1.45;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary-color);
+      background-color: #F3E8EA;
+    }
+
+    /* 결과 섹션 */
+    .result-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .result-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .result-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .result-box {
+      background-color: #FAF6F7;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .result-box h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--primary-color);
+    }
+
+    .result-box p {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    .notice-box {
+      background-color: #FCECEF;
+      border: 2px dashed var(--primary-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .notice-box p {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .gform-btn {
+      display: inline-block;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+      box-shadow: 0 4px 12px rgba(181, 113, 126, 0.2);
+    }
+
+    .gform-btn:hover {
+      background-color: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 1. 인트로 화면 -->
+    <div id="intro-screen" class="intro-box">
+      <div class="team-badge">HAFS 소디포 ‘사랑이뭐조’</div>
+      <h1>생물학적 사랑 vs 인문학적 사랑</h1>
+      <p>
+        안녕하세요! 저희는 사랑의 생물학적 관점과 인문학적 관점을 탐구하고 연구하는 HAFS 1학년 2반 ‘사랑이뭐조’(김려원, 이예서, 정윤서, 정나현)입니다. 간단한 테스트를 통해 나의 연애 성향이 두 관점 중 어디에 가까운지 알아보세요!
+      </p>
+      <button class="btn" onclick="startSurvey()">설문 진행하기</button>
+    </div>
+
+    <!-- 2. 질문 화면 -->
+    <div id="question-screen" class="hidden">
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div id="question-number" class="question-number">Q1 / 9</div>
+      <div id="question-text" class="question-text">질문 내용이 들어갑니다.</div>
+      <button id="choice-a" class="choice-btn" onclick="selectAnswer('A')">선택지 A</button>
+      <button id="choice-b" class="choice-btn" onclick="selectAnswer('B')">선택지 B</button>
+    </div>
+
+    <!-- 3. 결과 화면 -->
+    <div id="result-screen" class="hidden">
+      <div class="result-header">
+        <div id="result-emoji" class="result-emoji">🔥</div>
+        <div id="result-title" class="result-title">당신의 유형은 OOO입니다!</div>
+      </div>
+
+      <div class="result-box">
+        <h3>✨ 유형 특징</h3>
+        <p id="result-desc">유형 설명이 들어갑니다.</p>
+      </div>
+
+      <div class="result-box">
+        <h3>💌 당신을 위한 사랑 처방전</h3>
+        <p id="result-prescription">처방전 내용이 들어갑니다.</p>
+      </div>
+
+      <div class="notice-box">
+        <p>🚨 <strong>필수 요청 사항!</strong><br>연구 통계 산출을 위해 <u>위의 본인 유형 결과</u>를 아래 구글 폼에 <strong>반드시 제출</strong>해 주세요! 정말 소중한 자료가 됩니다. 🙏</p>
+        <a href="https://forms.gle/gE8BGVMC37xqgDkW6" target="_blank" class="gform-btn">📝 구글 폼에 내 유형 제출하러 가기</a>
+      </div>
+
+      <button class="btn" style="background-color: #8C7B7E; margin-top: 6px;" onclick="restartSurvey()">테스트 다시하기</button>
+    </div>
+  </div>
+
+  <script>
+    // 9가지 문항 데이터 (A: 버스식 / 생물학적, B: 프롬식 / 인문학적)
+    const questions = [
+      {
+        q: "내가 생각하는 사랑의 시작 조건은?",
+        a: "강렬한 첫눈의 끌림",
+        b: "오랜 시간 대화를 나누며 서로의 내면을 이해하는 과정"
+      },
+      {
+        q: "오래 만나다 보니 예전처럼 설레지 않을 때 나는?",
+        a: "마음이 식었다고 느끼며 불안해진다.",
+        b: "설렘이 지나고 편안함이 찾아온 거라며 자연스럽게 받아들인다."
+      },
+      {
+        q: "애인의 찌질하거나 깨는 모습을 발견했을 때 나는?",
+        a: "환상이 깨지면서 정이 훅 떨어진다.",
+        b: "사람이니까 완벽할 수 없지."
+      },
+      {
+        q: "나에게 있어 연애란 어떤 의미인가?",
+        a: "우연히 찾아오는 운명적, 로맨틱한 이벤트",
+        b: "서로 의지와 노력을 다해 가꾸어 나가야 하는 일상"
+      },
+      {
+        q: "애인과 싸웠을 때 나의 해결 방식은?",
+        a: "서운함을 바로 토로하고 결판을 보려고 한다.",
+        b: "감정을 가라앉히고 차분하게 대화한다."
+      },
+      {
+        q: "선물을 주고받을 때 더 중요하게 생각하는 것은?",
+        a: "남들에게 자랑할 서프라이즈 이벤트",
+        b: "정성과 마음이 담긴 진솔한 선물"
+      },
+      {
+        q: "시간이 흘러 애인의 외모나 스타일이 변했을 때 나는?",
+        a: "처음 만났을 때의 매력이 줄어들면 예전만큼 마음이 안 간다.",
+        b: "외모와 상관없이 함께 쌓아온 신뢰가 더 중요하다."
+      },
+      {
+        q: "내가 생각하는 안정적 사랑의 가장 핵심적 원동력은?",
+        a: "지루할 틈 없이 계속해서 새로운 설렘과 자극을 주는 것",
+        b: "매 순간 책임을 다하며 서로의 편이 되어주는 것"
+      },
+      {
+        q: "길을 가다가 내 취향인 사람을 마주쳤을 때 나는?",
+        a: "‘와 미쳤다…’ 속으로 환호를 지른다.",
+        b: "대화 안 해보면 모르니 크게 신경 안 쓴다."
+      }
+    ];
+
+    const resultTypes = {
+      busType: {
+        emoji: "🔥",
+        title: "버스식(생물학적) 러버 유형",
+        desc: "호르몬과 도파민이 이끄는 강렬한 설렘과 첫눈의 끌림을 사랑의 핵심으로 여깁니다. 관계가 불타오를 때는 세상 누구보다 뜨겁지만, 익숙함 속에서 설렘이 줄어들면 쉽게 불안감을 느끼는 타입입니다.",
+        prescription: "불꽃 같은 설렘이 잔잔해지는 것은 자연스러운 현상입니다. 감정의 기복에 너무 흔들리지 말고, 편안함 속의 깊이를 즐겨보세요!"
+      },
+      frommType: {
+        emoji: "🌿",
+        title: "프롬식(인문학적) 러버 유형",
+        desc: "에리히 프롬의 철학처럼 사랑은 감정이 아닌 의지와 책임, 기술을 통해 가꾸어 나가는 것이라 믿습니다. 순간의 낭만보다 진득한 대화와 신뢰를 바탕으로 단단한 관계를 쌓아가는 타입입니다.",
+        prescription: "이성적이고 성숙하지만, 때로는 연애가 과제처럼 느껴질 수 있어요. 가끔은 이유 없는 유치한 설렘이나 즉흥적인 데이트도 허락해 보세요!"
+      },
+      balancerType: {
+        emoji: "⚖️",
+        title: "낭만적 실용 밸런서 유형",
+        desc: "불꽃처럼 짜릿한 설렘(버스식)과 깊이 있는 대화 및 책임(프롬식)의 가치를 모두 아우르는 황금 균형형입니다. 감정과 이성을 상황에 맞게 유연하게 조율할 줄 압니다.",
+        prescription: "두 관점의 밸런스가 아주 훌륭합니다! 지금처럼 상대방과 맞춰가며 조화로운 연애를 오래 지속해 나가면 완벽합니다."
+      }
+    };
+
+    let currentIdx = 0;
+    let scoreA = 0;
+    let scoreB = 0;
+
+    const introScreen = document.getElementById('intro-screen');
+    const questionScreen = document.getElementById('question-screen');
+    const resultScreen = document.getElementById('result-screen');
+
+    const questionNumberEl = document.getElementById('question-number');
+    const questionTextEl = document.getElementById('question-text');
+    const choiceAEl = document.getElementById('choice-a');
+    const choiceBEl = document.getElementById('choice-b');
+    const progressBarEl = document.getElementById('progress-bar');
+
+    function startSurvey() {
+      currentIdx = 0;
+      scoreA = 0;
+      scoreB = 0;
+      introScreen.classList.add('hidden');
+      questionScreen.classList.remove('hidden');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = questions[currentIdx];
+      questionNumberEl.innerText = `Q${currentIdx + 1} / ${questions.length}`;
+      questionTextEl.innerText = q.q;
+      choiceAEl.innerText = q.a;
+      choiceBEl.innerText = q.b;
+      const progressPercent = ((currentIdx) / questions.length) * 100;
+      progressBarEl.style.width = `${progressPercent}%`;
+    }
+
+    function selectAnswer(type) {
+      if (type === 'A') scoreA++;
+      else scoreB++;
+
+      currentIdx++;
+      if (currentIdx < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      questionScreen.classList.add('hidden');
+      resultScreen.classList.remove('hidden');
+
+      let selectedType;
+      // 9문항 기준 3분할 판별 로직
+      if (scoreA >= 6) {
+        selectedType = resultTypes.busType;       // A가 6개 이상: 버스식 러버
+      } else if (scoreB >= 6) {
+        selectedType = resultTypes.frommType;    // B가 6개 이상: 프롬식 러버
+      } else {
+        selectedType = resultTypes.balancerType; // 섞였을 때: 낭만적 밸런서
+      }
+
+      document.getElementById('result-emoji').innerText = selectedType.emoji;
+      document.getElementById('result-title').innerText = `당신의 유형은 [${selectedType.title}]입니다!`;
+      document.getElementById('result-desc').innerText = selectedType.desc;
+      document.getElementById('result-prescription').innerText = selectedType.prescription;
+    }
+
+    function restartSurvey() {
+      resultScreen.classList.add('hidden');
+      introScreen.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
